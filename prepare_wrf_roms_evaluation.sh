@@ -22,7 +22,6 @@
 #            6 hour Daily Wind Speed at 10 m height (m/s);
 #            6 hour Sea Level Pressure (hPa);
 
-
 # Prepare ROMS.
 cd /media/ueslei/Ueslei/INPE/PCI/SC_2008/Outputs/normal/
 ncks -v temp,u,v -d s_rho,49,49 roms.nc roms_sfc.nc
@@ -38,5 +37,6 @@ mv roms_daily.nc roms_21_26_days_oscar.nc /media/ueslei/Ueslei/INPE/PCI/SC_2008/
 cd /media/ueslei/Ueslei/INPE/PCI/SC_2008/Outputs/normal
 cdo splitday wrf.nc day
 cdo cat day20.nc day21.nc day22.nc day23.nc day24.nc day25.nc day26.nc day27.nc day28.nc day29.nc day30.nc wrf_split.nc 
-cdo timselmean,6 wrf.nc wrf_6h_cfsr.nc
-mv /media/ueslei/Ueslei/INPE/PCI/SC_2008/Evaluation/WRF
+cdo timselmean,6 wrf_split.nc  wrf_6h_cfsr_ori.nc
+rm -rf day* wrf_split.nc  
+mv wrf_6h_cfsr.nc /media/ueslei/Ueslei/INPE/PCI/SC_2008/Dados/Evaluation/WRF/
