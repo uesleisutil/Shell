@@ -29,7 +29,7 @@ ncks -v temp,u,v -d s_rho,49,49 roms_nonudg.nc roms_nonudg_sfc.nc
 cdo splitday roms_nonudg_sfc.nc day
 cdo cat day21.nc day26.nc roms_nonudg_21_26_days_oscar_all.nc
 cdo daymean roms_nonudg_21_26_days_oscar_all.nc  roms_nonudg_21_26_days_oscar.nc  
-cdo cat day20.nc day21.nc day22.nc day23.nc day24.nc day25.nc day26.nc day27.nc day28.nc day29.nc day29.nc day30.nc roms_nonudg_sfc_split.nc 
+cdo cat day20.nc day21.nc day22.nc day23.nc day24.nc day25.nc day26.nc day27.nc day28.nc day29.nc day30.nc roms_nonudg_sfc_split.nc 
 cdo daymean roms_nonudg_sfc_split.nc roms_nonudg_daily.nc
 rm -rf day* roms_nonudg_sfc.nc roms_nonudg_sfc_split.nc roms_nonudg_21_26_days_oscar_all.nc
 mv roms_nonudg_daily.nc roms_nonudg_21_26_days_oscar.nc /media/ueslei/Ueslei/INPE/PCI/SC_2008/Dados/Evaluation/ROMS
@@ -39,7 +39,7 @@ ncks -v temp,u,v -d s_rho,49,49 roms_nudg.nc roms_nudg_sfc.nc
 cdo splitday roms_nudg_sfc.nc day
 cdo cat day21.nc day26.nc roms_nudg_21_26_days_oscar_all.nc
 cdo daymean roms_nudg_21_26_days_oscar_all.nc  roms_nudg_21_26_days_oscar.nc  
-cdo cat day20.nc day21.nc day22.nc day23.nc day24.nc day25.nc day26.nc day27.nc day28.nc day29.nc day29.nc day30.nc roms_nudg_sfc_split.nc 
+cdo cat day20.nc day21.nc day22.nc day23.nc day24.nc day25.nc day26.nc day27.nc day28.nc day29.nc day30.nc roms_nudg_sfc_split.nc 
 cdo daymean roms_nudg_sfc_split.nc roms_nudg_daily.nc
 rm -rf day* roms_nudg_sfc.nc roms_nudg_sfc_split.nc roms_nudg_21_26_days_oscar_all.nc
 mv roms_nudg_daily.nc roms_nudg_21_26_days_oscar.nc /media/ueslei/Ueslei/INPE/PCI/SC_2008/Dados/Evaluation/ROMS
@@ -50,4 +50,3 @@ cdo timselmean,6 wrf_nonudg.nc wrf_nonudg_6h_cfsr.nc
 mv /media/ueslei/Ueslei/INPE/PCI/SC_2008/Evaluation/WRF
 cd /media/ueslei/Ueslei/INPE/PCI/SC_2008/Outputs/normal/nudg
 cdo timselmean,6 wrf_nudg.nc wrf_nudg_6h_cfsr.nc
-mv /media/ueslei/Ueslei/INPE/PCI/SC_2008/Evaluation/WRF
