@@ -51,6 +51,15 @@ if (( $exp == 1)); then
     COANUM=$COADIR/cold_20
   fi  		
 fi
+if (( $exp == 2)); then
+  COADIR='/home/adriano.sutil/atleq/outputs'
+  COANUM=$COADIR
+fi
+if (( $exp == 3)); then
+  COADIR='/home/adriano.sutil/antartic/outputs'
+  COANUM=$COADIR
+fi
+
 echo ${red}${bg}Will prepare data for $COANUM${reset}
 echo ${green}${bg}Preparing WRF output${reset}
 ncks -v LANDMASK,PSFC,RAINNC,RAINC,RAINSH,SST,T2,T,Times,U10,V10,U,V,W,XLAT,XLONG,PH,HGT,QVAPOR,LH,PHB,Q2,PB,P,TH2,QCLOUD,PBLH,HFX $COANUM/wrfout* $COANUM/wrf.nc
