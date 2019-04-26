@@ -63,5 +63,5 @@ echo ${red}${bg}Will prepare data for $COANUM${reset}
 echo ${green}${bg}Preparing WRF output${reset}
 ncks -v LANDMASK,PSFC,RAINNC,RAINC,RAINSH,SST,T2,T,Times,U10,V10,U,V,W,XLAT,XLONG,PH,HGT,QVAPOR,LH,PHB,Q2,PB,P,TH2,QCLOUD,PBLH,HFX $COANUM/wrfout* $COANUM/wrf.nc
 echo ${green}${bg}Preparing ROMS output${reset}
-ncks -v temp,salt,u,v,w,latent,sensible,Pair,mask_rho,mask_u,mask_v,lat_rho,lon_rho,angle,Cs_r,hc,s_rho,Vtransform,zeta,h -d s_rho 49,49 $COANUM/sc_2008_his.nc $COANUM/roms.nc
+ncks -v temp,salt,u,v,w,latent,sensible,Pair,mask_rho,mask_u,mask_v,lat_rho,lon_rho,angle,Cs_r,hc,s_rho,Vtransform,zeta,h -d s_rho,49,49 $COANUM/sc_2008_his.nc $COANUM/roms.nc
 echo ${green}${bg}Finished.${reset}
