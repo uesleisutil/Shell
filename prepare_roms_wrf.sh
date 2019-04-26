@@ -4,7 +4,7 @@
 # Email:        ueslei@outlook.com
 # Created:      25 April 2019
 # Last modfied: 25 April 2019
-# Version:      1.0
+# Version:      1.1
 #
 # This script will prepare the WRF-ARW and ROMS outputs
 # using NCO.
@@ -16,15 +16,14 @@ bg=`tput setab 7`
 reset=`tput sgr0`
 
 echo "${red}${bg}Type the experiment number that you want, followed by [ENTER]:${reset}"
-echo "${red}${bg}(1) SC_2008 (2) ATLEQ (3) Antartic${reset}"
+echo "${red}${bg}(1) SC_2008, (2) ATLEQ or (3) Antartic${reset}"
 read exp
 
-COADIR='/home/adriano.sutil/sc_2008/outputs/coa_normal/outputs'
-
 if (( $exp == 1)); then
+  COADIR='/home/adriano.sutil/1_sc_2008/outputs'
   echo "${red}${bg}Type the experiment number that you want to prepare, followed by [ENTER]:${reset}"
-  echo "${red}${bg}(1) normal (2) +100% (3) +80% (4) +60% (5) +40% (6) +20%${reset}"
-  echo "${red}${bg}(7) -100% (8) -80% (9) -60% (10) -40% (11) -20%${reset}"
+  echo "${red}${bg}(1) normal, (2) +100%, (3) +80%, (4) +60%, (5) +40%, (6) +20%,${reset}"
+  echo "${red}${bg}(7) -100%, (8) -80%, (9) -60%, (10) -40% or (11) -20%${reset}"
   read exp_number
 	
   if (( $exp_number == 1)); then
@@ -52,11 +51,11 @@ if (( $exp == 1)); then
   fi  		
 fi
 if (( $exp == 2)); then
-  COADIR='/home/adriano.sutil/atleq/outputs'
+  COADIR='/home/adriano.sutil/3_atleq/outputs'
   COANUM=$COADIR
 fi
 if (( $exp == 3)); then
-  COADIR='/home/adriano.sutil/antartic/outputs'
+  COADIR='/home/adriano.sutil/2_antartic/outputs'
   COANUM=$COADIR
 fi
 
