@@ -7,8 +7,7 @@
 # Last modfied: 18 July 2019
 # Version:      1.6
 #
-# This script will prepare the WRF-ARW and ROMS outputs
-# using NCO.
+# This script will post-process WRF-ARW and ROMS outputs using NCO and CDO
 #
 
 red=`tput setaf 1`
