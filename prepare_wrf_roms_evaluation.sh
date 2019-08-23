@@ -1,13 +1,13 @@
-
 #
 # File:         prepare_roms_wrf.sh
 # Author:       Ueslei Adriano Sutil
 # Email:        ueslei@outlook.com
 # Created:      25 April 2019
-# Last modfied: 18 July 2019
-# Version:      1.6
+# Last modfied: 23 August 2019
+# Version:      1.7
 #
-# This script will post-process WRF-ARW and ROMS outputs using NCO and CDO
+# This script will prepare the WRF-ARW and ROMS outputs
+# using NCO.
 #
 
 red=`tput setaf 1`
@@ -62,22 +62,22 @@ fi
 echo ${red}${bg}Will prepare data for $COANUM${reset}
 echo ${green}${bg}Preparing WRF output${reset}
 if (( $exp == 1)); then
-  ncks -v LANDMASK,PSFC,RAINNC,RAINC,RAINSH,SST,T2,T,Times,U10,V10,U,V,W,XLAT,XLONG,PH,HGT,QVAPOR,LH,PHB,Q2,PB,P,TH2,QCLOUD,PBLH,HFX $COANUM/wrfout_d02* $COANUM/wrf_brute.nc
-  ncks -v LANDMASK,RAINNC,RAINC,XLAT,XLONG,Times $COANUM/wrf_brute.nc $COANUM/wrf_rain_1.nc 
   if (( $exp_number == 1)); then
-    cdo daymean $COANUM/wrf_rain_1.nc $COANUM/wrf_rain_2.nc
-    cdo splitday $COANUM/wrf_rain_2.nc $COANUM/day
-    rm -rf $COANUM/wrf_rain_1.nc $COANUM/wrf_rain_2.nc
+    cdo daymean $COANUM/wrf.nc $COANUM/wrf_rain_1.nc
+    cdo splitday $COANUM/wrf_rain_1.nc $COANUM/day
+    rm -rf $COANUM/wrf_rain_2.nc
     cdo cat $COANUM/day20.nc $COANUM/day21.nc $COANUM/day22.nc $COANUM/day23.nc $COANUM/day24.nc $COANUM/day25.nc $COANUM/day26.nc $COANUM/day27.nc $COANUM/wrf_rain.nc 
     rm -rf $COANUM/day*
   
-    cdo splitday $COANUM/wrf_brute.nc $COANUM/day
+    cdo splitday $COANUM/wrf.nc $COANUM/day
     cdo cat $COANUM/day20.nc $COANUM/day21.nc $COANUM/day22.nc $COANUM/day23.nc $COANUM/day24.nc $COANUM/day25.nc $COANUM/day26.nc $COANUM/day27.nc $COANUM/wrf_split.nc
     rm -rf $COANUM/day*
     cdo timselmean,6 $COANUM/wrf_split.nc $COANUM/wrf_6h.nc 
     cdo timselmean,3 $COANUM/wrf_split.nc $COANUM/wrf_3h.nc  
     rm -rf $COANUM/wrf_split.nc
   fi  
+  cdo seltimestep,169/336 $COANUM/wrf.nc $COANUM/wrf_ts.nc
+  ncks -v LANDMASK,PSFC,RAINNC,RAINC,RAINSH,SST,T2,T,Times,U10,V10,U,V,W,XLAT,XLONG,PH,HGT,QVAPOR,LH,PHB,Q2,PB,P,TH2,QCLOUD,PBLH,HFX $COANUM/wrf_ts.nc $COANUM/wrf_ts_ncks.nc
 fi
 if (( $exp == 2)); then
   ncks -v LANDMASK,PSFC,RAINNC,RAINC,RAINSH,SST,T2,T,Times,U10,V10,U,V,W,XLAT,XLONG,PH,HGT,QVAPOR,LH,PHB,Q2,PB,P,TH2,QCLOUD,PBLH,HFX $COANUM/wrfout* $COANUM/wrf.nc
@@ -103,7 +103,7 @@ if (( $exp == 2)); then
   ncks -v temp,salt,u,v,w,latent,sensible,Pair,mask_rho,mask_u,mask_v,lat_rho,lon_rho,angle,Cs_r,hc,s_rho,Vtransform,zeta,h,salt -d s_rho,49,49 $COANUM/ocean_his.nc $COANUM/roms.nc
 fi
 if (( $exp == 3)); then
-  ncks -v temp,salt,u,v,latent,sensible,Pair,mask_rho,mask_u,mask_v,lat_rho,lon_rho,angle,Cs_r,hc,s_rho,Vtransform,zeta,h,salt,aice,hice,iomflx -d s_rho,49,49 $COANUM/ocean_his.nc $COANUM/roms.nc
+  ncks -v temp,salt,u,v,latent,sensible,mask_rho,mask_u,mask_v,lat_rho,lon_rho,angle,Cs_r,hc,s_rho,Vtransform,zeta,h,salt,aice,hice,iomflx -d s_rho,39,39 $COANUM/ocean_his.nc $COANUM/roms.nc
 fi
 
 echo ${green}${bg}Finished.${reset}
